@@ -33,6 +33,16 @@
                     echo "<script>alert('Error al eliminar'); window.location.href='inicio.php';</script>";
                 }
             }
+        } elseif($_POST["accion"]=="Guardar"){
+            $consulta = "INSERT INTO $tabla VALUES('','$nombre')";
+            $ejecutar_consulta = mysqli_query($conexion,$consulta);
+            if($ejecutar_consulta)
+            {
+               echo "<script>alert('$tabla $nombre almacenado con éxito en la base de datos!');window.location.href='inicio.php';</script>"; 
+            }else{
+                echo "<script>alert('Error al insertar');window.location.href='inicio.php';</script>";
+            }
+        
         }
     }
 
