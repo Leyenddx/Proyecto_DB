@@ -1,0 +1,9 @@
+body 
+{
+        background-image: url("../media/img4.jpg"); 
+        background-size: cover;      
+        background-position: center;  
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        backdrop-filter: blur(2px); 
+    }

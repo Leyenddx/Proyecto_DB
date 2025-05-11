@@ -6,80 +6,122 @@ $conexion = mysqli_connect('localhost','root','','dbejemplo');
 ?>
 
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Inicio</title>
-        <style>
-            .formulario{
-                display: none;
-                border: 1px solid #ccc;
-                background-color: #f9f9f9;
-                width: 300px;
-            }
-        </style>
-    </head>
-    <body>
-        <input type="button" value="Cerrar Sesión" onclick="window.location.href='index.php';"> <br>
-        <label>Bienvenido, <?php echo"$usuario"; ?></label>
-    <br>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
 
-    <button onclick="mostrarformulario('formcliente')">Cliente</button>
-    <button onclick="mostrarformulario('formparte')">Parte</button>
+        .contenido {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
 
-    <!-- Formulario Cliente -->
-    <!-- Llamamos a un objeto en css por su . -->
-    <div id="formcliente" class="formulario">
-    <h3>Cliente</h3>
-    <form action="cliente_parte.php" method="post">
-        <input type="hidden" name="tipo_formulario" value="cliente">
-        <label>Nombre Cliente</label>
-        <input type="text" name="nombre">
-        <br><br>
-        <input type="submit" name="accion" value="Guardar">
-        <input type="submit" name="accion" value="Eliminar">
-    </form>
-    </div>
+        .formulario {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        h4, h5, label {
+            color: white;
+        }
+
+        input[type="text"], .form-control {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn {
+            font-size: 1.1rem;
+            padding: 10px 20px;
+        }
+
+        .acciones input {
+            margin-right: 10px;
+        }
+
+        hr {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="contenido text-center">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="mb-0">Bienvenido, <?php echo htmlspecialchars($usuario); ?></h4>
+            <input type="button" class="btn btn-outline-light" value="Cerrar Sesión" onclick="window.location.href='index.php';">
+        </div>
+
+        <div class="mb-4 d-flex justify-content-center gap-3">
+            <button class="btn btn-light" onclick="mostrarformulario('formcliente')">Cliente</button>
+            <button class="btn btn-light" onclick="mostrarformulario('formparte')">Parte</button>
+        </div>
+
+        <!-- Formulario Cliente -->
+        <div id="formcliente" class="formulario">
+            <h5>Cliente</h5>
+            <form action="cliente_parte.php" method="post">
+                <input type="hidden" name="tipo_formulario" value="cliente">
+                <div class="mb-3 text-start">
+                    <label class="form-label">Nombre Cliente</label>
+                    <input type="text" name="nombre" class="form-control">
+                </div>
+                <div class="acciones">
+                    <input type="submit" name="accion" value="Guardar" class="btn btn-success">
+                    <input type="submit" name="accion" value="Eliminar" class="btn btn-danger">
+                </div>
+            </form>
+        </div>
 
         <!-- Formulario Parte -->
-    <!-- Llamamos a un objeto en css por su . -->
-    <div id="formparte" class="formulario">
-    <h3>Parte</h3>
-    <form action="cliente_parte.php" method="post">
-    <input type="hidden" name="tipo_formulario" value="parte">
-        <label>Numero de Parte</label>
-        <input type="text" name="nombre">
-        <br><br>
-        <input type="submit" name="accion" value="Guardar">
-        <input type="submit" name="accion" value="Eliminar">
-    </form>
+        <div id="formparte" class="formulario">
+            <h5>Parte</h5>
+            <form action="cliente_parte.php" method="post">
+                <input type="hidden" name="tipo_formulario" value="parte">
+                <div class="mb-3 text-start">
+                    <label class="form-label">Número de Parte</label>
+                    <input type="text" name="nombre" class="form-control">
+                </div>
+                <div class="acciones">
+                    <input type="submit" name="accion" value="Guardar" class="btn btn-success">
+                    <input type="submit" name="accion" value="Eliminar" class="btn btn-danger">
+                </div>
+            </form>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="d-flex justify-content-center gap-3">
+            <input type="button" value="Inventario" class="btn btn-warning" onclick="window.location.href='pagina_inventario.php'">
+            <input type="button" value="Ver Historial" class="btn btn-info" onclick="window.location.href='pagina_historial.php';">
+        </div>
     </div>
-
- <!-- Prueba de inter relacion tablas movimiento y usuario -->
-    <!--
-    <form action="movimiento.php" method="post">
-    <input type="submit" name="movimiento" value="Insertar">
-    <input type="submit" name="movimiento" value="Eliminar">
-    </form>
-    -->
-    <br>
-    <input type="button" value="Inventario" onclick="window.location.href='pagina_inventario.php'">
-    <input type="button" value="Ver Historial" onclick="window.location.href='pagina_historial.php';">
-
 
     <script>
         function mostrarformulario(id) {
-            var formulario = document.getElementById(id)
-            if (!formulario.style.display || formulario.style.display === "") {
-                formulario.style.display = "none";
-            }
-
-            // Alternar entre ocultar/mostrar
-            formulario.style.display = (formulario.style.display === "none") ? "block" : "none";
+            const formularios = document.querySelectorAll('.formulario');
+            formularios.forEach(form => form.style.display = 'none');
+            const seleccionado = document.getElementById(id);
+            if (seleccionado) seleccionado.style.display = 'block';
         }
-
-
     </script>
-    </body>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
