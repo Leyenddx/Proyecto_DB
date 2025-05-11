@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <title>Inventario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../CSS_Local/inventario.css">
+    <link rel="stylesheet" href="../CSS_Local/inventario.css">
     <style>
         .formulario {
             display: none;

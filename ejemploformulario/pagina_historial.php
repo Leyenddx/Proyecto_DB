@@ -9,7 +9,7 @@ $conexion = mysqli_connect('localhost','root','','dbejemplo');
     <title>Historial</title>
     <!-- Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../CSS_Local/historial.css">
+    <link rel="stylesheet" href="../CSS_Local/historial.css">
 </head>
 <body class="container mt-4">
 
