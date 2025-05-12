@@ -1,5 +1,5 @@
 <?php
-    $conexion = mysqli_connect('localhost','root','','dbejemplo');
+    $conexion = mysqli_connect('localhost','root','','proyecto_final');
     $nombre = $_POST["nombre"];
     $tipo_form = $_POST["tipo_formulario"];
 

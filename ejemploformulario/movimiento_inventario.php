@@ -2,7 +2,7 @@
 
 use Dom\Mysql;
 
-        $conexion = mysqli_connect('localhost','root','','dbejemplo');
+        $conexion = mysqli_connect('localhost','root','','proyecto_final');
         session_start();
         $usuario = $_SESSION['usuario'];
 

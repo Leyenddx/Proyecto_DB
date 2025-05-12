@@ -2,7 +2,7 @@
    $servidor = "localhost";
    $usuario = "root";
    $contrasena = "";
-   $base_de_datos = "dbejemplo";
+   $base_de_datos = "proyecto_final";
 
    $conexion = mysqli_connect($servidor,$usuario,$contrasena,$base_de_datos);
 ?>

@@ -2,7 +2,7 @@
 session_start();
 $usuario = $_SESSION['usuario'];
 
-$conexion = mysqli_connect('localhost','root','','dbejemplo');
+$conexion = mysqli_connect('localhost','root','','proyecto_final');
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,5 @@
 <?php
-        $conexion = mysqli_connect('localhost','root','','dbejemplo');
+        $conexion = mysqli_connect('localhost','root','','proyecto_final');
 
         if(isset($_POST["elemento_busqueda"])) {
             $filtro = $_POST["elemento_busqueda"];

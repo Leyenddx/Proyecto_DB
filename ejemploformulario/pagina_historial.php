@@ -1,5 +1,5 @@
 <?php
-$conexion = mysqli_connect('localhost','root','','dbejemplo');
+$conexion = mysqli_connect('localhost','root','','proyecto_final');
 ?>
 
 <!DOCTYPE html>

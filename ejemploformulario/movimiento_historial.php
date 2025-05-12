@@ -5,7 +5,7 @@ use Dom\Mysql;
 session_start();
 $usuario = $_SESSION['usuario'];
 
-$conexion = mysqli_connect('localhost','root','','dbejemplo');
+$conexion = mysqli_connect('localhost','root','','proyecto_final');
 
 $consulta_id = "SELECT id FROM tablaejemplo WHERE nombre = '$usuario';";
 $resultado_id = mysqli_query($conexion, $consulta_id);
