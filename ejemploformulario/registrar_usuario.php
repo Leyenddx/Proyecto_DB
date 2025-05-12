@@ -19,7 +19,7 @@
             exit();
         }
     
-        $insertar_datos = "INSERT INTO tablaejemplo VALUES('$nombre','$contrasena','')";
+        $insertar_datos = "INSERT INTO usuarios VALUES('$nombre','$contrasena','')";
         $ejecutar_insertar = mysqli_query($conexion, $insertar_datos);
     
         if ($ejecutar_insertar) {

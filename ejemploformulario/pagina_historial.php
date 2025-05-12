@@ -33,7 +33,7 @@ $conexion = mysqli_connect('localhost','root','','dbejemplo');
             <?php
                 $consulta = "SELECT h.id_move, u.nombre, h.tipo, h.id_producto, h.fecha_hora 
                              FROM historial h
-                             JOIN tablaejemplo u ON h.id_usuario = u.id";
+                             JOIN usuarios u ON h.id_usuario = u.id";
                 $resultado = mysqli_query($conexion, $consulta);
 
                 while ($mostrar = mysqli_fetch_array($resultado)) {

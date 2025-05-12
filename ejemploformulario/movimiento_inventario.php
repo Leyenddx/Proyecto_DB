@@ -6,7 +6,7 @@ use Dom\Mysql;
         session_start();
         $usuario = $_SESSION['usuario'];
 
-        $consulta_id_usuario = "SELECT id FROM tablaejemplo WHERE nombre = '$usuario'";
+        $consulta_id_usuario = "SELECT id FROM usuarios WHERE nombre = '$usuario'";
         $resultado_id_usuario = mysqli_query($conexion,$consulta_id_usuario);
         $fila_id_usuario = mysqli_fetch_assoc($resultado_id_usuario);
         $id_usuario = $fila_id_usuario['id'];
@@ -31,10 +31,11 @@ use Dom\Mysql;
                 $fila_cliente = mysqli_fetch_assoc($cliente);
                 $id_cliente = $fila_cliente['id_cliente'];
 
-                $locacion = $_POST['locacion'];
+                $id_locacion = intval($_POST['locacion']);
+
                 $cantidad = intval($_POST['cantidad']);
 
-                $consulta_enviar = "INSERT INTO inventario VALUES('','$id_parte','$id_cliente','$locacion',$cantidad);";
+                $consulta_enviar = "INSERT INTO inventario VALUES('','$id_parte','$id_cliente',$cantidad, $id_locacion);";
             
                
 

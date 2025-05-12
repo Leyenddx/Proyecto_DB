@@ -15,7 +15,7 @@ if(isset($_POST['entrar']))
 
     $contrasena = $_POST['contrasena'];
 
-    $consulta = "SELECT * FROM tablaejemplo WHERE nombre = '$nombre' AND contrasena = '$contrasena'";
+    $consulta = "SELECT * FROM usuarios WHERE nombre = '$nombre' AND contrasena = '$contrasena'";
     $resultado = mysqli_query($conexion,$consulta);
 
     if(mysqli_num_rows($resultado)>0)
