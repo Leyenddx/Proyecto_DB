@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-05-2025 a las 20:46:13
+-- Tiempo de generación: 22-05-2025 a las 02:17:17
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyecto_final`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacenista`
+--
+
+CREATE TABLE `almacenista` (
+  `nombre` varchar(50) NOT NULL,
+  `contrasena` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `almacenista`
+--
+
+INSERT INTO `almacenista` (`nombre`, `contrasena`, `id`) VALUES
+('Gael', '1234', 1),
+('Aron', '1234', 2),
+('Cesar', '1234', 3);
 
 -- --------------------------------------------------------
 
@@ -41,7 +62,8 @@ INSERT INTO `cliente` (`id_cliente`, `nombre`) VALUES
 (10, 'Coppel'),
 (12, 'Smart'),
 (14, 'Empresa 1'),
-(15, 'Telcel');
+(15, 'Telcel'),
+(16, 'Soriana');
 
 -- --------------------------------------------------------
 
@@ -74,31 +96,12 @@ INSERT INTO `historial` (`id_move`, `id_usuario`, `tipo`, `fecha_hora`, `id_prod
 (10, 1, 'Insertar', '2025-05-12 12:20:42', 13),
 (11, 1, 'Insertar', '2025-05-12 12:21:11', 14),
 (12, 1, 'Insertar', '2025-05-12 12:31:01', 15),
-(13, 1, 'Eliminar', '2025-05-12 12:31:08', 13);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `inventario`
---
-
-CREATE TABLE `inventario` (
-  `id_producto` int(11) NOT NULL,
-  `id_parte` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `id_locacion` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `inventario`
---
-
-INSERT INTO `inventario` (`id_producto`, `id_parte`, `id_cliente`, `cantidad`, `id_locacion`) VALUES
-(11, 2, 9, 1, 7),
-(12, 3, 12, 25, 7),
-(14, 4, 15, 5, 5),
-(15, 4, 14, 14, 6);
+(13, 1, 'Eliminar', '2025-05-12 12:31:08', 13),
+(14, 1, 'Eliminar', '2025-05-21 17:39:38', 11),
+(15, 1, 'Eliminar', '2025-05-21 17:39:45', 12),
+(16, 1, 'Eliminar', '2025-05-21 17:39:50', 14),
+(17, 1, 'Eliminar', '2025-05-21 17:39:56', 15),
+(18, 2, 'Insertar', '2025-05-21 18:10:31', 16);
 
 -- --------------------------------------------------------
 
@@ -154,35 +157,33 @@ INSERT INTO `parte` (`id_parte`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Estructura de tabla para la tabla `producto`
 --
 
-CREATE TABLE `usuarios` (
-  `nombre` varchar(50) NOT NULL,
-  `contrasena` varchar(50) NOT NULL,
-  `id` int(11) NOT NULL
+CREATE TABLE `producto` (
+  `id_producto` int(11) NOT NULL,
+  `id_parte` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `id_locacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `usuarios` (`nombre`, `contrasena`, `id`) VALUES
-('Gael', '1234', 1),
-('Jorge', '1425', 2),
-('Alan', '4321', 3),
-('Gabriela', '1524', 4),
-('Alan', 'pipipi', 5),
-('El Pepe', 'pasw', 6),
-('Elieser', '5678', 7),
-('Gael', 'ROEG040414', 8),
-('Villa', 'villa:v', 9),
-('Alumno', '1234', 10),
-('Vian', '1235', 11);
+INSERT INTO `producto` (`id_producto`, `id_parte`, `id_cliente`, `cantidad`, `id_locacion`) VALUES
+(16, 3, 16, 250, 7);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `almacenista`
+--
+ALTER TABLE `almacenista`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `cliente`
@@ -198,15 +199,6 @@ ALTER TABLE `historial`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indices de la tabla `inventario`
---
-ALTER TABLE `inventario`
-  ADD PRIMARY KEY (`id_producto`),
-  ADD KEY `id_parte` (`id_parte`),
-  ADD KEY `id_cliente` (`id_cliente`),
-  ADD KEY `id_locacion` (`id_locacion`);
-
---
 -- Indices de la tabla `locacion`
 --
 ALTER TABLE `locacion`
@@ -219,32 +211,35 @@ ALTER TABLE `parte`
   ADD PRIMARY KEY (`id_parte`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indices de la tabla `producto`
 --
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`id_producto`),
+  ADD KEY `id_parte` (`id_parte`),
+  ADD KEY `id_cliente` (`id_cliente`),
+  ADD KEY `id_locacion` (`id_locacion`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
+-- AUTO_INCREMENT de la tabla `almacenista`
+--
+ALTER TABLE `almacenista`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id_move` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT de la tabla `inventario`
---
-ALTER TABLE `inventario`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_move` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `locacion`
@@ -259,10 +254,10 @@ ALTER TABLE `parte`
   MODIFY `id_parte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT de la tabla `producto`
 --
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `producto`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
