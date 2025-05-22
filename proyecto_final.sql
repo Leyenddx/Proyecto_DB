@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2025 a las 02:17:17
+-- Tiempo de generación: 22-05-2025 a las 03:11:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -101,7 +101,13 @@ INSERT INTO `historial` (`id_move`, `id_usuario`, `tipo`, `fecha_hora`, `id_prod
 (15, 1, 'Eliminar', '2025-05-21 17:39:45', 12),
 (16, 1, 'Eliminar', '2025-05-21 17:39:50', 14),
 (17, 1, 'Eliminar', '2025-05-21 17:39:56', 15),
-(18, 2, 'Insertar', '2025-05-21 18:10:31', 16);
+(18, 2, 'Insertar', '2025-05-21 18:10:31', 16),
+(19, 2, 'Eliminar', '2025-05-21 18:22:17', 16),
+(20, 3, 'Insertar', '2025-05-21 18:44:12', 17),
+(21, 3, 'Eliminar', '2025-05-21 18:45:14', 17),
+(22, 3, 'Insertar', '2025-05-21 19:07:32', 18),
+(23, 3, 'Insertar', '2025-05-21 19:07:45', 19),
+(24, 3, 'Insertar', '2025-05-21 19:08:04', 20);
 
 -- --------------------------------------------------------
 
@@ -112,24 +118,26 @@ INSERT INTO `historial` (`id_move`, `id_usuario`, `tipo`, `fecha_hora`, `id_prod
 CREATE TABLE `locacion` (
   `id_locacion` int(11) NOT NULL,
   `num_rack` int(11) NOT NULL,
-  `nombre_locacion` varchar(15) NOT NULL
+  `nombre_locacion` varchar(15) NOT NULL,
+  `estado_ocupado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `locacion`
 --
 
-INSERT INTO `locacion` (`id_locacion`, `num_rack`, `nombre_locacion`) VALUES
-(1, 1, 'A10'),
-(2, 1, 'A11'),
-(3, 1, 'A12'),
-(4, 1, 'A13'),
-(5, 2, 'A20'),
-(6, 2, 'A21'),
-(7, 2, 'A22'),
-(8, 2, 'A23'),
-(9, 3, 'A30'),
-(10, 3, 'A31');
+INSERT INTO `locacion` (`id_locacion`, `num_rack`, `nombre_locacion`, `estado_ocupado`) VALUES
+(1, 1, 'A10', 1),
+(2, 1, 'A11', 1),
+(3, 1, 'A12', 1),
+(4, 1, 'A13', 0),
+(5, 2, 'A20', 0),
+(6, 2, 'A21', 0),
+(7, 2, 'A22', 0),
+(8, 3, 'A30', 0),
+(9, 3, 'A31', 0),
+(10, 3, 'A32', 0),
+(11, 3, 'A33', 0);
 
 -- --------------------------------------------------------
 
@@ -149,10 +157,7 @@ CREATE TABLE `parte` (
 INSERT INTO `parte` (`id_parte`, `nombre`) VALUES
 (2, 'X0001'),
 (3, 'X0002'),
-(4, 'X0003'),
-(5, 'X01'),
-(6, 'X16'),
-(7, 'H615');
+(4, 'X0003');
 
 -- --------------------------------------------------------
 
@@ -173,7 +178,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `id_parte`, `id_cliente`, `cantidad`, `id_locacion`) VALUES
-(16, 3, 16, 250, 7);
+(18, 2, 9, 15, 1),
+(19, 3, 15, 200, 2),
+(20, 2, 9, 350, 3);
 
 --
 -- Índices para tablas volcadas
@@ -239,25 +246,25 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id_move` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_move` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `locacion`
 --
 ALTER TABLE `locacion`
-  MODIFY `id_locacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_locacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `parte`
 --
 ALTER TABLE `parte`
-  MODIFY `id_parte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_parte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
