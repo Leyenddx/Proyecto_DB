@@ -35,7 +35,23 @@ use Dom\Mysql;
 
                 $cantidad = intval($_POST['cantidad']);
 
-                $consulta_enviar = "INSERT INTO producto VALUES('','$id_parte','$id_cliente',$cantidad, $id_locacion);";
+                //Antes de enviar, verificaremos que la locacion es libre
+                $consulta_estado = "SELECT estado_ocupado FROM locacion WHERE id_locacion = '$id_locacion'";
+                $resultado_estado = mysqli_query($conexion, $consulta_estado);
+                $fila_estado = mysqli_fetch_assoc($resultado_estado);
+                $estado = intval($fila_estado['estado_ocupado']);
+
+                if($estado != 0){
+                    echo "<script>alert('Error, locacion ocupada'); window.location.href='pagina_inventario.php';</script>";
+                    return;
+                }
+                else
+                {
+                    $consulta_enviar = "INSERT INTO producto VALUES('','$id_parte','$id_cliente',$cantidad, $id_locacion);";
+                    $consulta_actualizar = "UPDATE locacion SET estado_ocupado = 1 WHERE id_locacion = $id_locacion";
+                    $actualizar_entrada = mysqli_query($conexion,$consulta_actualizar);
+                }
+                
             
                
 
@@ -54,11 +70,20 @@ use Dom\Mysql;
                 $id_eliminar = $_POST['id_eliminar'];
                 $id_copia = $id_eliminar;
                 if (!empty($id_eliminar)) {
+
+                     // Recuperar la locación asociada al producto
+                    $consulta_locacion = "SELECT id_locacion FROM producto WHERE id_producto = $id_eliminar";
+                    $resultado_locacion = mysqli_query($conexion, $consulta_locacion);
+                    $fila_locacion = mysqli_fetch_assoc($resultado_locacion);
+                    $id_locacion = $fila_locacion['id_locacion'];  // Ahora sí tienes la locación
+
                     $consulta = "DELETE FROM producto WHERE id_producto = $id_eliminar";
                     mysqli_query($conexion, $consulta);
                     $consulta_historial = "INSERT INTO historial VALUES('',$id_usuario,'Eliminar', NOW(),$id_copia);";
                     mysqli_query($conexion, $consulta_historial);
                     echo "<script>alert('Elemento con id $id_eliminar eliminado de la tabla.'); window.location.href='pagina_inventario.php';</script>";
+                    $consulta_actualizar_salida = "UPDATE locacion SET estado_ocupado = 0 WHERE id_locacion = $id_locacion";
+                    $actualizar_entrada = mysqli_query($conexion,$consulta_actualizar_salida);
                 } else {
                     echo "<script>alert('Error: ID no válido.');</script>";
                 }
